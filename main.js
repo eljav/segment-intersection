@@ -62,9 +62,6 @@ function onMouseMoveD() {
 animate();
 
 function animate() {
-    //A.x = mouse.x;
-    //A.y = mouse.y;
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
     ctx.moveTo(A.x, A.y);
@@ -76,8 +73,6 @@ function animate() {
     drawDot(B, "B");
     drawDot(C, "C");
     drawDot(D, "D");
-
-    
 
     const I = getIntersection(A, B, C, D);
     if (I) {
@@ -127,8 +122,4 @@ function pointCircleCollision(circle) {
         dy = circle.y - mouse.y;
     d = Math.sqrt(dx * dx + dy * dy);
     return d < 10;
-}
-
-function moveDot(dot, x, y) {
-
 }
