@@ -13,31 +13,50 @@ const mouse = { x: 0, y: 0 };
 document.onmousedown = (event) => {
     mouse.x = event.x;
     mouse.y = event.y;
-    if (pointCircleCollision(A)) {
-        //document.addEventListener("mousemove", onMouseMove(A));
-        
-        document.addEventListener("mousemove", onMouseMove);
-
+    if (pointCircleCollision(A)) {        
+        document.addEventListener("mousemove", onMouseMoveA);
         document.addEventListener("mouseup", function(event) {
-            document.removeEventListener("mousemove", onMouseMove);
-            document.removeEventListener("mouseup", arguments.callee);
+            document.removeEventListener("mousemove", onMouseMoveA);
         });
-        
     }
-    if (pointCircleCollision(B)) {
-        console.log("B");
+    else if (pointCircleCollision(B)) {
+        document.addEventListener("mousemove", onMouseMoveB);
+        document.addEventListener("mouseup", function(event) {
+            document.removeEventListener("mousemove", onMouseMoveB);
+        });
     }
-    if (pointCircleCollision(C)) {
-        console.log("C");
+    else if (pointCircleCollision(C)) {
+        document.addEventListener("mousemove", onMouseMoveC);
+        document.addEventListener("mouseup", function(event) {
+            document.removeEventListener("mousemove", onMouseMoveC);
+        });
     }
-    if (pointCircleCollision(D)) {
-        console.log("D");
+    else if (pointCircleCollision(D)) {
+        document.addEventListener("mousemove", onMouseMoveD);
+        document.addEventListener("mouseup", function(event) {
+            document.removeEventListener("mousemove", onMouseMoveD);
+        });
     }
 };
 
-function onMouseMove() {
+function onMouseMoveA() {
     A.x = event.x;
     A.y = event.y;
+}
+
+function onMouseMoveB() {
+    B.x = event.x;
+    B.y = event.y;
+}
+
+function onMouseMoveC() {
+    C.x = event.x;
+    C.y = event.y;
+}
+
+function onMouseMoveD() {
+    D.x = event.x;
+    D.y = event.y;
 }
 
 animate();
