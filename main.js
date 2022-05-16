@@ -3,7 +3,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const A = { x: 200, y: 150 };
-const B = { x: 150, y: 250};
+const B = { x: 150, y: 250 };
 const C = { x: 50, y: 100 };
 const D = { x: 250, y: 200 };
 
@@ -13,13 +13,38 @@ const mouse = { x: 0, y: 0 };
 document.onmousedown = (event) => {
     mouse.x = event.x;
     mouse.y = event.y;
+    if (pointCircleCollision(A)) {
+        //document.addEventListener("mousemove", onMouseMove(A));
+        
+        document.addEventListener("mousemove", onMouseMove);
+
+        document.addEventListener("mouseup", function(event) {
+            document.removeEventListener("mousemove", onMouseMove);
+            document.removeEventListener("mouseup", arguments.callee);
+        });
+        
+    }
+    if (pointCircleCollision(B)) {
+        console.log("B");
+    }
+    if (pointCircleCollision(C)) {
+        console.log("C");
+    }
+    if (pointCircleCollision(D)) {
+        console.log("D");
+    }
 };
+
+function onMouseMove() {
+    A.x = event.x;
+    A.y = event.y;
+}
 
 animate();
 
 function animate() {
-    A.x = mouse.x;
-    A.y = mouse.y;
+    //A.x = mouse.x;
+    //A.y = mouse.y;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
@@ -32,6 +57,8 @@ function animate() {
     drawDot(B, "B");
     drawDot(C, "C");
     drawDot(D, "D");
+
+    
 
     const I = getIntersection(A, B, C, D);
     if (I) {
@@ -59,13 +86,9 @@ function getIntersection(A, B, C, D) {
     return null;
 }
 
-
-
 function lerp(A, B, t) {
     return A + (B - A) * t;
 }
-
-
 
 function drawDot(point, label, isRed) {
     ctx.beginPath();
@@ -78,5 +101,15 @@ function drawDot(point, label, isRed) {
     ctx.textBaseline = "middle";
     ctx.font = "bold 14px Arial";
     ctx.fillText(label, point.x, point.y);
-    
+}
+
+function pointCircleCollision(circle) {
+    var dx = circle.x - mouse.x,
+        dy = circle.y - mouse.y;
+    d = Math.sqrt(dx * dx + dy * dy);
+    return d < 10;
+}
+
+function moveDot(dot, x, y) {
+
 }
