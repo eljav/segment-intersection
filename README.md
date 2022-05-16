@@ -3,3 +3,5 @@ Segment intersection with drag and drop on a JavaScript canvas, based on [Radu's
 
 ## To-do
 Refactor onMouseMove functions
+
+eljav.github.io/segment-intersection
